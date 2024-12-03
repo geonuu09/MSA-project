@@ -3,6 +3,7 @@ package com.sparta.msa_exam.order.orders;
 import com.sparta.msa_exam.order.client.ProductClient;
 import com.sparta.msa_exam.order.core.Order;
 import com.sparta.msa_exam.order.core.OrderProduct;
+import com.sparta.msa_exam.product.products.ProductRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -43,4 +44,26 @@ public class OrderService {
     }
 
 
+    @Transactional
+    public void updateOrder(Long orderId, ProductRequestDto requestDto) {
+        try{
+            Long productId = requestDto.getProduct_id();
+            //상품목록조회
+            productClient.getProduct(productId);
+
+            Order order = orderRepository.findById(orderId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "주문을 찾을 수 없습니다."));
+            List<OrderProduct> productList = order.getProduct_ids();
+
+            productList.add(OrderProduct.createOrderProduct(productId, order));
+
+            orderRepository.save(order);
+        } catch(ResponseStatusException e) {
+            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 상품을 찾을 수 없습니다.");
+            } else {
+                throw e;
+            }
+        }
+    }
 }

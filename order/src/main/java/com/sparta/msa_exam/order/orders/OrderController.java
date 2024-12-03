@@ -1,6 +1,7 @@
 package com.sparta.msa_exam.order.orders;
 
 
+import com.sparta.msa_exam.product.products.ProductRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,5 +20,10 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public OrderResponseDto getOrderById(@PathVariable("orderId") Long orderId) {
         return orderService.getOrderById(orderId);
+    }
+
+    @PutMapping("/{orderId}")
+    public void updateOrder(@PathVariable("orderId") Long orderId, @RequestBody ProductRequestDto requestDto) {
+        orderService.updateOrder(orderId, requestDto);
     }
 }
