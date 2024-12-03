@@ -1,9 +1,10 @@
 package com.sparta.msa_exam.order.orders;
 
 import com.sparta.msa_exam.order.client.ProductClient;
+import com.sparta.msa_exam.order.client.ProductRequestDto;
 import com.sparta.msa_exam.order.core.Order;
 import com.sparta.msa_exam.order.core.OrderProduct;
-import com.sparta.msa_exam.product.products.ProductRequestDto;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;

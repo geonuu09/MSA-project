@@ -1,7 +1,7 @@
 package com.sparta.msa_exam.order.orders;
 
 
-import com.sparta.msa_exam.product.products.ProductRequestDto;
+import com.sparta.msa_exam.order.client.ProductRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
