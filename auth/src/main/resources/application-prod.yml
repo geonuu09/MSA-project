@@ -1,0 +1,30 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://{rds endpoint}:3306/msa_exam
+    username: admin
+    password: # password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+  data:
+    redis:
+      host: # redis host
+      port: # redis port
+      username: # username
+      password: # password
+eureka:
+  client:
+    service-url:
+      defaultZone: # eureka url
+management:
+  zipkin:
+    tracing:
+      endpoint: # zipkin endpoint
+service:
+  jwt:
+    access-expiration: # access expiration
+    secret-key: # secret key
