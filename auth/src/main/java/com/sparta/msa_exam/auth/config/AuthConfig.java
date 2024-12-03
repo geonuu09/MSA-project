@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity//스프링 시큐리티 활성화 및 웹 보안 설정 구성
-public class SecurityConfig {
+public class AuthConfig {
 
     // SecurityFilterChain 빈을 정의합니다. 이 메서드는 Spring Security의 보안 필터 체인을 구성합니다.
     @Bean

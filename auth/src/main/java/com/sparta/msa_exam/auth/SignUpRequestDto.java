@@ -14,7 +14,6 @@ import com.sparta.msa_exam.auth.core.User;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SignUpRequestDto {
-    private String userId;   // 사용자 ID
     private String username; // 사용자 이름
     private String password; // 비밀번호
     private String role;     // 사용자 역할 (예: MEMBER, ADMIN)
@@ -25,10 +24,9 @@ public class SignUpRequestDto {
      */
     public static User toEntity(SignUpRequestDto requestDto) {
         return User.builder()
-                .userId(requestDto.getUserId())     // 사용자 ID
-                .username(requestDto.getUsername()) // 사용자 이름
-                .password(requestDto.getPassword()) // 비밀번호 (암호화 전)
-                .role(requestDto.getRole())         // 사용자 역할
+                .username(requestDto.getUsername())
+                .password(requestDto.getPassword())
+                .role(requestDto.getRole())
                 .build();
     }
 }

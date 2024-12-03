@@ -37,13 +37,13 @@ public class AuthService {
 
     /**
      * JWT 액세스 토큰 생성
-     * @param user_id 사용자 ID
+     * @param username 사용자 ID
      * @param role 사용자 역할
      * @return 생성된 JWT 토큰 문자열
      */
-    public String createAccessToken(String user_id, String role) {
+    public String createAccessToken(String username, String role) {
         return Jwts.builder()
-                .setSubject(user_id) // 사용자 ID를 클레임으로 설정
+                .setSubject(username) // 사용자 ID를 클레임으로 설정
                 .claim("role", role) // 사용자 역할을 클레임으로 추가
                 .setIssuer(issuer) // JWT 발행자 설정
                 .setIssuedAt(new Date(System.currentTimeMillis())) // 발행 시간
@@ -59,7 +59,7 @@ public class AuthService {
      */
     public User signUp(SignUpRequestDto requestDto) {
         // 사용자 중복 확인
-        if (userRepository.existsById(requestDto.getUserId())) {
+        if (userRepository.existsByUsername(requestDto.getUsername())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "중복된 사용자가 존재합니다.");
         }
 
@@ -79,7 +79,7 @@ public class AuthService {
     public String signIn(SignInRequestDto requestDto) {
         // 사용자 존재 여부 확인
         User user = userRepository.findById(requestDto.getUserId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 ID입니다."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "사용자가 존재하지 않습니다."));
 
         // 비밀번호 일치 여부 확인
         if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
@@ -87,7 +87,7 @@ public class AuthService {
         }
 
         // JWT 토큰 생성
-        return createAccessToken(user.getUserId(), user.getRole());
+        return createAccessToken(user.getUsername(), user.getRole());
     }
 
     /**
@@ -95,7 +95,7 @@ public class AuthService {
      * @param userId 확인할 사용자 ID
      * @return 사용자 존재 여부 (true/false)
      */
-    public boolean checkUser(String userId) {
+    public boolean checkUser(Long userId) {
         return userRepository.existsById(userId); // 사용자 존재 여부 반환
     }
 }

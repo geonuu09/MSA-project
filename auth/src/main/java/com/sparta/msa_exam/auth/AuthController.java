@@ -36,7 +36,7 @@ public class AuthController {
     }
 
     @GetMapping("{userId}")
-    public boolean checkUser(@PathVariable("userId") String userId){
+    public boolean checkUser(@PathVariable("userId") Long userId){
         System.out.println(userId);
         return authService.checkUser(userId);
     }
