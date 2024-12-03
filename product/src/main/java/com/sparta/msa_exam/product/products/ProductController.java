@@ -28,9 +28,4 @@ public class ProductController {
     ProductResponseDto getProductById(@PathVariable("id") Long id){
         return productService.getProductById(id);
     }
-
-    @GetMapping("/{id}/reduceQuantity")
-    public void reduceProductQuantity(@PathVariable Long id, @RequestParam int quantity) {
-        productService.reduceProductQuantity(id, quantity);
-    }
 }

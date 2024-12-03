@@ -11,5 +11,4 @@ public class ProductRequestDto {
     private Long product_id;
     private String name;
     private int supply_price;
-    private int quantity;
 }

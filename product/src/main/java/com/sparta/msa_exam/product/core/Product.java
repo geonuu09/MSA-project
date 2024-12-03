@@ -22,18 +22,11 @@ public class Product {
     @Column(nullable = false)
     private int supply_price;
 
-    @Column(nullable = false)
-    private int quantity;
-
     public static Product createProduct(ProductRequestDto requestDto) {
         return Product.builder()
                 .name(requestDto.getName())
                 .supply_price(requestDto.getSupply_price())
-                .quantity(requestDto.getQuantity())
                 .build();
     }
 
-    public void reduceQuantity(int i) {
-        this.quantity = this.quantity - i;
-    }
 }

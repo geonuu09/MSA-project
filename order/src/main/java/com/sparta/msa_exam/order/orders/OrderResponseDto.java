@@ -2,24 +2,28 @@ package com.sparta.msa_exam.order.orders;
 
 import com.sparta.msa_exam.order.core.Order;
 import com.sparta.msa_exam.order.core.OrderProduct;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Data
+@Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderResponseDto {
+public class OrderResponseDto implements Serializable {
     private Long orderId;
     private List<Long> product_ids = new ArrayList<>();
 
-    public OrderResponseDto(Order order) {
-        this.orderId = order.getOrder_id();
-        for(OrderProduct orderProduct : order.getProduct_ids()){
-            product_ids.add(orderProduct.getProduct_id());
-        }
+    public static OrderResponseDto fromEntity(Order order){
+        return OrderResponseDto.builder()
+                .orderId(order.getOrder_id())
+                .product_ids(order.getProduct_ids().stream()
+                        .map(OrderProduct::getProduct_id)
+                        .collect(Collectors.toList()))
+                .build();
     }
+
 }

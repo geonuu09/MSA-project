@@ -23,7 +23,7 @@ public class OrderController {
     }
 
     @PutMapping("/{orderId}")
-    public void updateOrder(@PathVariable("orderId") Long orderId, @RequestBody ProductRequestDto requestDto) {
-        orderService.updateOrder(orderId, requestDto);
+    public OrderResponseDto updateOrder(@PathVariable("orderId") Long orderId, @RequestBody ProductRequestDto requestDto) {
+        return orderService.updateOrder(orderId, requestDto);
     }
 }

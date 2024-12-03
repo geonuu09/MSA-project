@@ -10,6 +10,4 @@ public interface ProductClient {
     @GetMapping("/products/{id}")
     ProductResponseDto getProduct(@PathVariable("id") Long id);
 
-    @GetMapping("/products/{id}/reduceQuantity")
-    void reduceProductQuantity(@PathVariable("id") Long id, @RequestParam("quantity") int quantity);
 }

@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductResponseDto {
-    private Long id;
+    private Long product_id;
     private String name;
-    private String description;
-    private int quantity;
+    private int supply_price;
 }
