@@ -3,13 +3,7 @@ spring:
     default: dev
   application:
     name: product-service
-  jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        use_sql_comments: true
-        highlight_sql: true
+
 server:
   port: 19093
 

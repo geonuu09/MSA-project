@@ -8,8 +8,13 @@ spring:
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    hibernate:
-      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true # SQL 쿼리를 콘솔에 출력
+        format_sql: true # 콘솔에 출력되는 SQL 쿼리를 읽기 쉬운 형식으로 정리
+        use_sql_comments: true # 주석 추가
+        highlight_sql: true # 색상으로 쿼리문을 구분
+
   # redis
   data:
     redis:
