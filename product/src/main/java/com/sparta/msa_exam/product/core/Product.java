@@ -1,5 +1,6 @@
 package com.sparta.msa_exam.product.core;
 
+
 import com.sparta.msa_exam.product.products.ProductRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -14,15 +15,25 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long product_id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private int supply_price;
+
+    @Column(nullable = false)
+    private int quantity;
 
     public static Product createProduct(ProductRequestDto requestDto) {
         return Product.builder()
                 .name(requestDto.getName())
                 .supply_price(requestDto.getSupply_price())
+                .quantity(requestDto.getQuantity())
                 .build();
+    }
+
+    public void reduceQuantity(int i) {
+        this.quantity = this.quantity - i;
     }
 }
