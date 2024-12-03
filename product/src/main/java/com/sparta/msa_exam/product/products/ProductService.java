@@ -2,8 +2,10 @@ package com.sparta.msa_exam.product.products;
 
 import com.sparta.msa_exam.product.core.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public ProductResponseDto getProductById(Long productId) {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new NullPointerException("해당 상품을 찾을 수 없습니다."));
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 상품을 찾을 수 없습니다."));
         return new ProductResponseDto(product);
     }
 
