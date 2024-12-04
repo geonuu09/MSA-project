@@ -32,12 +32,5 @@ public class AuthController {
     @NoArgsConstructor
     static class AuthResponse {
         private String access_token;
-
-    }
-
-    @GetMapping("{userId}")
-    public boolean checkUser(@PathVariable("userId") Long userId){
-        System.out.println(userId);
-        return authService.checkUser(userId);
     }
 }
